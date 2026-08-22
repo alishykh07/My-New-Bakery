@@ -1,0 +1,13 @@
+.inventory-summary{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}
+.inventory-summary article{padding:17px 20px}.inventory-summary strong{margin:8px 0 0;font-size:30px}
+.inventory-toolbar-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inventory-toolbar-actions input{min-width:240px}
+.admin-content .inventory-filter-button{background:#f4ead4;color:#70401e}
+.admin-content .inventory-filter-button.active{background:#a43d25;color:#fff}
+.inventory-products-table th:last-child,.inventory-products-table td:last-child{width:1%;white-space:nowrap}.inventory-products-table th:last-child{text-align:center}.stock-adjustment{display:flex;width:max-content;align-items:center;justify-content:flex-end;gap:7px}
+.stock-adjustment input{width:74px;padding:10px;text-align:center}
+.admin-content .stock-adjustment .remove-stock{background:#f4ead4;color:#8f351f}
+.inventory-out-of-stock-row{background:#ffe3dc!important}
+.inventory-empty-row{text-align:center;color:#9b704e;padding:34px}
+.inventory-history{margin-top:18px}.inventory-history-filters{display:flex;flex-wrap:wrap;gap:6px}.admin-content .inventory-history-filters button{padding:8px 11px;background:#f4ead4;color:#70401e}.admin-content .inventory-history-filters button.active{background:#2c0903;color:#ffd974}.movement-badge{display:inline-block;padding:6px 9px;border-radius:20px;font-size:10px;font-weight:700}.movement-badge.sale{background:#f9e0d8;color:#96341f}.movement-badge.restock{background:#dcefdc;color:#276c3c}.movement-badge.manual_removal{background:#eee4d5;color:#77533a}
+@media(max-width:700px){.inventory-summary{grid-template-columns:1fr}.inventory-toolbar-actions input{min-width:100%;width:100%}.stock-adjustment{min-width:250px}}

@@ -1,0 +1,1 @@
+export default function StaticPage({title,children}){return <main className="page-shell"><p className="eyebrow text-[#8f4a14]">My New Bakery</p><h1 className="page-title">{title}</h1><p className="page-copy">{children}</p></main>}

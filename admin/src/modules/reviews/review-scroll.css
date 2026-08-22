@@ -1,0 +1,13 @@
+/* Bakery-themed table scroll: appears only when the review columns cannot fit. */
+.review-table-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9b5a26 #f7ead0;
+}
+.review-table-scroll::-webkit-scrollbar { height: 8px; }
+.review-table-scroll::-webkit-scrollbar-track { background: #f7ead0; border-radius: 10px; }
+.review-table-scroll::-webkit-scrollbar-thumb { background: #9b5a26; border-radius: 10px; }
+
+@media (min-width: 721px) and (max-width: 1150px) {
+  .review-data-table { min-width: 1050px; }
+}

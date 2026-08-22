@@ -1,0 +1,29 @@
+{
+  "name": "@my-new-bakery/client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "latest",
+    "@react-three/fiber": "latest",
+    "gsap": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^7.18.2",
+    "three": "latest",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "latest",
+    "@vitejs/plugin-react": "latest",
+    "tailwindcss": "latest",
+    "vite": "latest"
+  }
+}

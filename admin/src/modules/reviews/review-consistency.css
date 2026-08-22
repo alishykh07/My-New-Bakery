@@ -1,0 +1,27 @@
+.reviews-panel.category-manager { width: 100%; }
+.reviews-panel .category-heading { margin-bottom: 22px; }
+.reviews-panel .review-filters { margin-top: 0; }
+.reviews-panel .review-filters label,
+.reviews-panel .review-filters select { min-height: 52px; background: #fff; border-color: #dfc184; }
+.reviews-panel .review-filters label:focus-within,
+.reviews-panel .review-filters select:focus { border-color: #9b621a; outline: 2px solid rgba(254,206,0,.22); outline-offset: 0; }
+.review-data-table { width: 100%; min-width: 1050px; border-collapse: collapse; table-layout: auto; }
+.review-data-table th {
+  padding: 0 12px 12px;
+  color: #9a6c48;
+  background-color: transparent;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+  vertical-align: middle;
+  letter-spacing: .9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+.review-data-table th:first-child,.review-data-table td:first-child { width: 34%; }
+.review-data-table th:last-child,.review-data-table td:last-child { min-width: 240px; }
+.review-data-table td { padding: 20px 12px; border-top: 1px solid #edd8aa; vertical-align: middle; }
+.review-data-table tbody tr { transition: background-color .2s ease; }
+.review-data-table tbody tr:hover { background: #fff9ec; }

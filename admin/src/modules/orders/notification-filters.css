@@ -1,0 +1,8 @@
+.notification-filters{display:flex;flex-wrap:wrap;gap:6px}
+.admin-content .notification-filters button{padding:9px 12px;background:#f4ead4;color:#70401e}
+.admin-content .notification-filters button.active{background:#fece00;color:#2c0903}
+.notification-page-icon.low_stock{background:#ffe0d5;color:#a43d25}
+.notification-page-icon.review{background:#fff1c4;color:#9b621a}
+.inventory-low-stock-row{background:#fff0ec}
+.inventory-low-stock-row td{border-top-color:#efb6a8;color:#9f301d}
+.inventory-low-stock-row td:first-child b{color:#b12f18}

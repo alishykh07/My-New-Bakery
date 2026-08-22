@@ -1,0 +1,2 @@
+import mongoose from 'mongoose';
+export default mongoose.model('Category',new mongoose.Schema({name:{type:String,required:true},slug:{type:String,required:true,unique:true},department:{type:String,default:'cakes'},type:{type:String,enum:['cakes','paties'],required:true},image:String,description:String,order:{type:Number,default:0},showInNavigation:{type:Boolean,default:true},showInHomeFavourite:{type:Boolean,default:true},isActive:{type:Boolean,default:true}},{timestamps:true}));

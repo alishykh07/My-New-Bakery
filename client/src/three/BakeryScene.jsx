@@ -1,0 +1,3 @@
+import { Canvas } from '@react-three/fiber';import { Float,OrbitControls } from '@react-three/drei';
+function Cake(){return <Float speed={1.5} rotationIntensity={.25}><mesh rotation={[.15,.2,0]}><cylinderGeometry args={[1.4,1.4,.8,48]}/><meshStandardMaterial color="#fece00" roughness={.48}/></mesh><mesh position={[0,.46,0]}><torusGeometry args={[1.18,.09,12,48]}/><meshStandardMaterial color="#ffd974"/></mesh></Float>}
+export default function BakeryScene(){return <Canvas camera={{position:[0,0,4]}}><ambientLight intensity={1.4}/><directionalLight position={[3,4,3]} intensity={2}/><Cake/><OrbitControls enableZoom={false} enablePan={false}/></Canvas>}

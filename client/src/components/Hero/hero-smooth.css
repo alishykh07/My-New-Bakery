@@ -1,0 +1,7 @@
+/* One uninterrupted reveal—no midpoint hold or speed change. */
+.labs-hero__slide.is-active:not(.is-settled){animation:bakery-clip-reveal-smooth 1.85s cubic-bezier(.4,0,.2,1) both}
+@keyframes bakery-clip-reveal-smooth{
+  from{clip-path:var(--clip-start);-webkit-clip-path:var(--clip-start)}
+  to{clip-path:var(--clip-end);-webkit-clip-path:var(--clip-end)}
+}
+@media(prefers-reduced-motion:reduce){.labs-hero__slide.is-active:not(.is-settled){animation:none;clip-path:none;-webkit-clip-path:none}}

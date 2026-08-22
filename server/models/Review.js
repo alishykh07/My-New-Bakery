@@ -1,0 +1,2 @@
+import mongoose from 'mongoose';
+export default mongoose.model('Review',new mongoose.Schema({customer:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},product:{type:mongoose.Schema.Types.ObjectId,ref:'Product',required:true},rating:{type:Number,min:.5,max:5,required:true,validate:{validator:value=>Number.isInteger(value*2),message:'Rating must use half-star steps'}},comment:String,status:{type:String,enum:['pending','approved','hidden'],default:'pending'},notificationSeenAt:Date},{timestamps:true}));

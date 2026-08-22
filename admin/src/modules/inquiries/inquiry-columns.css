@@ -1,0 +1,2 @@
+.inquiries-table .inquiry-message{min-width:240px;max-width:420px}
+.inquiries-table .inquiry-message span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#7d563c}

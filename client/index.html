@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2c0903" />
+    <title>My New Bakery — The Italian Seduction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/images/cakes/wedding-hero.png" fetchpriority="high" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <style>
+      html:not(.app-ready), html:not(.app-ready) body { width: 100%; height: 100%; overflow: hidden; }
+      html:not(.app-ready) #root { opacity: 0; }
+      #root { opacity: 1; transition: opacity .36s ease-out; }
+      #app-loader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden; background: #2c0903; color: #ffd974; transition: opacity .38s ease, visibility .38s ease; }
+      #app-loader.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+      .boot-loader__glow { position: absolute; width: min(72vw, 620px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(254,206,0,.22), transparent 66%); filter: blur(8px); animation: boot-glow 1.8s ease-in-out infinite alternate; }
+      .boot-loader__content { position: relative; display: grid; justify-items: center; gap: 18px; text-align: center; }
+      .boot-loader__cake { position: relative; width: 82px; height: 56px; border: 2px solid #ffd974; border-radius: 8px 8px 18px 18px; background: linear-gradient(145deg, #d4862a, #8f4311); box-shadow: inset 0 10px rgba(255,255,255,.12), 0 10px 26px rgba(0,0,0,.25); animation: boot-cake 1.25s ease-in-out infinite; }
+      .boot-loader__cake:before { content: ''; position: absolute; left: -6px; right: -6px; top: 15px; height: 10px; border-top: 2px solid #ffd974; border-bottom: 2px solid #ffd974; background: #fff2cf; }
+      .boot-loader__cake:after { content: ''; position: absolute; left: 50%; top: -27px; width: 2px; height: 23px; background: #ffd974; box-shadow: -19px 9px 0 -0.5px #ffd974, 19px 9px 0 -0.5px #ffd974; }
+      .boot-loader__flame { position: absolute; top: -36px; width: 8px; height: 13px; border-radius: 60% 60% 60% 60%; background: #fece00; box-shadow: 0 0 14px #fece00; animation: boot-flame .55s ease-in-out infinite alternate; }
+      .boot-loader__flame--one { left: 37px; }.boot-loader__flame--two { left: 18px; top: -27px; }.boot-loader__flame--three { right: 18px; top: -27px; }
+      .boot-loader__name { margin: 5px 0 0; font: 700 28px/1 'Playfair Display', Georgia, serif; letter-spacing: .03em; }.boot-loader__copy { margin: 0; font: 700 9px/1.4 Manrope, sans-serif; letter-spacing: .22em; text-transform: uppercase; }.boot-loader__line { width: 108px; height: 2px; overflow: hidden; background: rgba(255,217,116,.25); }.boot-loader__line:before { content: ''; display: block; width: 46%; height: 100%; background: #fece00; animation: boot-line 1s ease-in-out infinite; }
+      @keyframes boot-glow { to { transform: scale(1.13); opacity: .7; } } @keyframes boot-cake { 50% { transform: translateY(-5px) rotate(-1deg); } } @keyframes boot-flame { to { transform: scaleY(.72) translateY(2px); opacity: .72; } } @keyframes boot-line { from { transform: translateX(-115%); } to { transform: translateX(240%); } }
+      @media (prefers-reduced-motion: reduce) { #root, #app-loader { transition: none; } .boot-loader__glow, .boot-loader__cake, .boot-loader__flame, .boot-loader__line:before { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div id="app-loader" role="status" aria-label="Loading My New Bakery">
+      <div class="boot-loader__glow"></div>
+      <div class="boot-loader__content">
+        <div class="boot-loader__cake"><i class="boot-loader__flame boot-loader__flame--one"></i><i class="boot-loader__flame boot-loader__flame--two"></i><i class="boot-loader__flame boot-loader__flame--three"></i></div>
+        <p class="boot-loader__name">My New Bakery</p>
+        <p class="boot-loader__copy">Freshly baked for you</p><span class="boot-loader__line"></span>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

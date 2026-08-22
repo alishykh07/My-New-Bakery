@@ -1,0 +1,1 @@
+.product-list-item{display:flex;align-items:center;gap:12px;min-width:220px}.product-list-item img,.product-no-image{width:52px;height:52px;flex:0 0 52px;border-radius:7px;object-fit:cover;background:#f3e4c5}.product-no-image{display:grid;place-items:center;padding:4px;text-align:center;font-size:8px;color:#966442}

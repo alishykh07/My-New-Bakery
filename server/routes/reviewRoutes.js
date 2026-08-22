@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import Review from '../models/Review.js';
+import Product from '../models/Product.js';
+import { protect } from '../middleware/authMiddleware.js';
+const router=Router();
+router.get('/approved',async(req,res,next)=>{try{const limit=Math.min(20,Math.max(1,Number(req.query.limit)||10));const reviews=await Review.find({status:'approved'}).populate('customer','name').populate({path:'product',select:'name slug images type isActive archived',match:{isActive:true,archived:{$ne:true}}}).sort('-createdAt').limit(limit).lean();res.json({reviews:reviews.filter(review=>review.product)})}catch(e){next(e)}});
+router.get('/product/:productId',async(req,res,next)=>{try{const reviews=await Review.find({product:req.params.productId,status:'approved'}).populate('customer','name').sort('-createdAt');const average=reviews.length?reviews.reduce((sum,item)=>sum+item.rating,0)/reviews.length:0;res.json({reviews,average,count:reviews.length})}catch(e){next(e)}});
+router.post('/',protect,async(req,res,next)=>{try{const {product,rating,comment}=req.body;if(!await Product.exists({_id:product,isActive:true}))return res.status(404).json({message:'Product not found'});const review=await Review.findOneAndUpdate({customer:req.user._id,product},{rating,comment,status:'pending',notificationSeenAt:null},{upsert:true,returnDocument:'after',runValidators:true,setDefaultsOnInsert:true});res.status(201).json({review,message:'Thank you! Your review is awaiting approval.'})}catch(e){next(e)}});
+router.get('/mine/:productId',protect,async(req,res,next)=>{try{res.json({review:await Review.findOne({customer:req.user._id,product:req.params.productId})})}catch(e){next(e)}});
+export default router;

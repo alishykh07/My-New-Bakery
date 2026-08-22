@@ -1,0 +1,23 @@
+{
+  "name": "@my-new-bakery/server",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "latest",
+    "cloudinary": "^2.10.0",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "jsonwebtoken": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "multer": "latest",
+    "nodemailer": "^9.0.5"
+  }
+}

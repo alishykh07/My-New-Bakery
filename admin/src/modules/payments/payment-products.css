@@ -1,0 +1,29 @@
+.payments-table { min-width: 1180px; }
+.payment-products { display: grid; gap: 7px; min-width: 205px; }
+.payment-product { display: flex; align-items: center; gap: 9px; }
+.payment-product img,
+.payment-product > span { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 7px; background: #f3e4c5; object-fit: cover; }
+.payment-product > span { display: grid; place-items: center; color: #966442; font-size: 8px; text-align: center; }
+.payment-product b { display: block; max-width: 145px; }
+.payment-product small { white-space: nowrap; }
+.payments-table .payment-select-column { width: 52px; min-width: 52px; max-width: 52px; padding-left: 2px; padding-right: 10px; text-align: left; }
+.payments-table .payment-select-column input { display: block; margin: 0; }
+.payments-table .payment-image-column { width: 80px; min-width: 80px; max-width: 80px; padding-left: 10px; padding-right: 10px; }
+.payment-image { display: block; width: 50px; height: 50px; border-radius: 7px; object-fit: cover; background: #f3e4c5; }
+.payment-image.empty { display: grid; place-items: center; color: #966442; font-size: 8px; text-align: center; }
+.payment-product-names { display: grid; min-width: 155px; gap: 7px; }
+.payment-product-names b,.payment-product-names small { display: block; }
+.payment-product-names small { white-space: nowrap; }
+.payments-table { width: 1220px; min-width: 1220px; table-layout: fixed; }
+.payments-table .col-select { width: 52px; }
+.payments-table .col-image { width: 80px; }
+.payments-table .col-product { width: 185px; }
+.payments-table .col-order { width: 180px; }
+.payments-table .col-customer { width: 195px; }
+.payments-table .col-amount { width: 105px; }
+.payments-table .col-method { width: 140px; }
+.payments-table .col-status { width: 150px; }
+.payments-table .col-date { width: 155px; }
+.payments-table th,.payments-table td { padding-left: 10px; padding-right: 10px; vertical-align: middle; }
+.payments-table th:first-child,.payments-table td:first-child { padding-left: 2px; }
+.payments-table td { overflow-wrap: anywhere; }

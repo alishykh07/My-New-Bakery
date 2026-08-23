@@ -32,7 +32,7 @@ import InquiriesManager from "./modules/inquiries/InquiriesManager.jsx";
 import CustomRequestsPanel from "./modules/orders/CustomRequestsPanel.jsx";
 import "./admin-modules.css";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API = `${(import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/api\/?$/, "").replace(/\/$/, "")}/api`;
 const money = (value) => `Rs. ${(value || 0).toLocaleString()}`;
 const slugify = (value) =>
   value

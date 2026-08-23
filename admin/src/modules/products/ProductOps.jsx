@@ -60,6 +60,7 @@ export default function ProductOps({ products, categories, patch, create, remove
       if (file) {
         const upload = new FormData();
         upload.append("image", file);
+        upload.append("category", category._id);
         const response = await fetch(`${API}/api/products/upload-image`, {
             method: "POST",
             headers: {

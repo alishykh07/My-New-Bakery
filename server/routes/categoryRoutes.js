@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 router.post('/upload-image', protect, adminOnly, upload.single('image'), async (req, res, next) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Please choose a category image' });
-    const uploaded = await uploadImage(req.file.buffer, `my-new-bakery/categories/${safePart(req.body.department)}`);
+    const uploaded = await uploadImage(req.file.buffer, `my-new-bakery/categories/${safePart(req.body.department)}/${safePart(req.body.name)}`);
     res.status(201).json({ image: uploaded.secure_url, publicId: uploaded.public_id });
   } catch (error) { next(error); }
 });

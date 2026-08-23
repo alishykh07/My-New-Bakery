@@ -50,6 +50,7 @@ export default function HeroSlidesEditor({
     try {
       const body = new FormData();
       body.append("media", file);
+      body.append("folder", "sliders");
       const response = await fetch(`${API}/admin/config/upload-media`, {
         method: "POST",
         headers: {

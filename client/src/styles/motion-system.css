@@ -1,0 +1,24 @@
+:root { --motion-ease: cubic-bezier(.22, 1, .36, 1); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-enabled .motion-reveal { opacity: 0; transform: translate3d(0, 26px, 0) scale(.988); filter: blur(2px); transition: opacity .72s var(--motion-ease) var(--motion-stagger, 0ms), transform .72s var(--motion-ease) var(--motion-stagger, 0ms), filter .55s ease var(--motion-stagger, 0ms); will-change: transform, opacity; }
+  .motion-enabled .motion-reveal.motion-visible { opacity: 1; transform: none; filter: none; }
+  .motion-enabled .route-motion { animation: route-enter .48s var(--motion-ease) both; }
+  .gold-button { position: relative; overflow: hidden; transition: transform .28s var(--motion-ease), background-color .28s ease, color .28s ease, border-color .28s ease, box-shadow .28s ease; }
+  .gold-button::after { position: absolute; inset: 0; content: ''; background: linear-gradient(105deg, transparent 36%, rgba(255,255,255,.34) 50%, transparent 64%); transform: translateX(-120%); transition: transform .55s var(--motion-ease); pointer-events: none; }
+  .gold-button:hover::after { transform: translateX(120%); }
+  .gold-button:hover { box-shadow: 0 10px 25px rgba(44,9,3,.2); }
+  .gold-button:active { transform: translateY(1px) scale(.985); box-shadow: none; }
+  header nav > a, header nav > div > button { position: relative; }
+  header nav > a::after, header nav > div > button::after { position: absolute; right: 0; bottom: -5px; left: 0; height: 1px; content: ''; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .28s var(--motion-ease); }
+  header nav > a:hover::after, header nav > a[aria-current="page"]::after, header nav > div > button:hover::after { transform: scaleX(1); transform-origin: left; }
+  .bakery-product-card { transition: transform .35s var(--motion-ease), filter .35s ease; }
+  .bakery-product-card:hover { filter: drop-shadow(0 18px 18px rgba(18,3,0,.16)); }
+  .bakery-footer.motion-visible .bakery-footer__intro, .bakery-footer.motion-visible .bakery-footer__column, .bakery-footer.motion-visible .bakery-footer__bottom { animation: footer-rise .68s var(--motion-ease) both; }
+  .bakery-footer.motion-visible .bakery-footer__column:nth-of-type(2) { animation-delay: .08s; }.bakery-footer.motion-visible .bakery-footer__column:nth-of-type(3) { animation-delay: .16s; }.bakery-footer.motion-visible .bakery-footer__column:nth-of-type(4) { animation-delay: .24s; }
+  @keyframes route-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes footer-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) { .motion-enabled .motion-reveal { transform: translate3d(0, 16px, 0); transition-duration: .48s; } .gold-button::after { display: none; } }
+@media (prefers-reduced-motion: reduce) { .motion-reveal, .route-motion, .gold-button, .gold-button::after { animation: none !important; transition: none !important; transform: none !important; filter: none !important; } }

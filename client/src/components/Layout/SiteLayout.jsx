@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar.jsx';
 import CategoryBar from '../Categories/CategoryBar.jsx';
 import Footer from '../Footer/Footer.jsx';
 import { useSiteConfig } from '../../services/siteConfig.js';
+import MotionLayer from '../UI/MotionLayer.jsx';
 
 export default function SiteLayout({children}) {
   const location = useLocation();
@@ -49,5 +50,5 @@ export default function SiteLayout({children}) {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [location.key]);
 
-  return <><Navbar/>{!isHomePage && <CategoryBar compact/>}{children}<Footer/></>;
+  return <><MotionLayer/><Navbar/>{!isHomePage && <CategoryBar compact/>}<div className="route-motion" key={location.key}>{children}</div><Footer/></>;
 }

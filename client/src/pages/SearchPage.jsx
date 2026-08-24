@@ -18,7 +18,7 @@ export default function SearchPage() {
   const [params] = useSearchParams();
   const category = params.get('category') || 'all';
   const [query, setQuery] = useState('');
-  const [products, setProducts] = useState(catalog);
+  const [products, setProducts] = useState([]);
   useEffect(() => { api('/products').then(data => setProducts(data.products)).catch(() => {}); }, []);
   const results = useMemo(() => products.filter(product => matchesCategory(product, category) && matchesProductSearch(product, query)), [products, query, category]);
 

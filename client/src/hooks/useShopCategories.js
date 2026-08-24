@@ -23,7 +23,7 @@ function loadCategories() {
 }
 
 export function useShopCategories() {
-  const [categories,setCategories]=useState(cachedCategories||fallback);
+  const [categories,setCategories]=useState(cachedCategories||[]);
   useEffect(()=>{let active=true;loadCategories().then(items=>{if(active)setCategories(items)}).catch(()=>{});return()=>{active=false}},[]);
   return categories;
 }

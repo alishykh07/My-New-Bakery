@@ -1,10 +1,15 @@
 import { Router } from 'express';
+import multer from 'multer';
 import MainCategory from '../models/MainCategory.js';
 import Category from '../models/Category.js';
 import Product from '../models/Product.js';
+import { uploadImage } from '../config/cloudinary.js';
 import { adminOnly,protect } from '../middleware/authMiddleware.js';
 const router=Router();
+const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:5*1024*1024},fileFilter:(req,file,cb)=>cb(null,file.mimetype.startsWith('image/'))});
+const safePart=value=>String(value||'other').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'other';
 router.get('/',async(req,res,next)=>{try{const [mainCategories,categories,products]=await Promise.all([MainCategory.find().sort('order name').lean(),Category.find().select('_id department type').lean(),Product.find().select('category department type').lean()]);const department=item=>item.department||(item.type==='paties'?'pastries':'cakes');const categoryDepartment=new Map(categories.map(item=>[String(item._id),department(item)]));const subCounts=new Map(),productCounts=new Map();categories.forEach(item=>{const key=department(item);subCounts.set(key,(subCounts.get(key)||0)+1)});products.forEach(item=>{const key=categoryDepartment.get(String(item.category))||department(item);productCounts.set(key,(productCounts.get(key)||0)+1)});res.json({mainCategories:mainCategories.map(item=>({...item,subcategoryCount:subCounts.get(item.slug)||0,productCount:productCounts.get(item.slug)||0}))})}catch(e){next(e)}});
+router.post('/upload-image',protect,adminOnly,upload.single('image'),async(req,res,next)=>{try{if(!req.file)return res.status(400).json({message:'Please choose a main category image'});const uploaded=await uploadImage(req.file.buffer,`my-new-bakery/main-categories/${safePart(req.body.name)}`);res.status(201).json({image:uploaded.secure_url,publicId:uploaded.public_id})}catch(e){next(e)}});
 router.post('/',protect,adminOnly,async(req,res,next)=>{try{res.status(201).json({mainCategory:await MainCategory.create(req.body)})}catch(e){next(e)}});
 router.patch('/:id',protect,adminOnly,async(req,res,next)=>{try{const item=await MainCategory.findByIdAndUpdate(req.params.id,req.body,{returnDocument:'after',runValidators:true});if(!item)return res.status(404).json({message:'Main category not found'});res.json({mainCategory:item})}catch(e){next(e)}});
 router.delete('/:id',protect,adminOnly,async(req,res,next)=>{try{const item=await MainCategory.findById(req.params.id);if(!item)return res.status(404).json({message:'Main category not found'});const [categories,products]=await Promise.all([Category.countDocuments({department:item.slug}),Product.countDocuments({department:item.slug})]);if(categories||products)return res.status(409).json({message:`Move ${categories} subcategory(s) and ${products} product(s) before deleting this main category.`});await item.deleteOne();res.json({message:'Main category deleted'})}catch(e){next(e)}});

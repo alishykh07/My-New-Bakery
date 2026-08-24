@@ -17,7 +17,7 @@ export default function FavouriteCategories() {
       const subs = (subData.categories || []).filter(sub => sub.isActive !== false);
       const visible = mains.map((main, index) => {
         const firstSubcategory = subs.find(sub => (sub.department || (sub.type === 'paties' ? 'pastries' : 'cakes')) === main.slug);
-        return { key: `main-${main._id}`, title: main.name, to: shopLink(main), image: firstSubcategory?.image || fallbackImage, number: String(index + 1).padStart(2, '0') };
+        return { key: `main-${main._id}`, title: main.name, to: shopLink(main), image: main.image || firstSubcategory?.image || fallbackImage, number: String(index + 1).padStart(2, '0') };
       });
       setCategories(visible);
     }).catch(() => setCategories([]));

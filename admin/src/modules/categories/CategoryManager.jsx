@@ -1,7 +1,7 @@
 import { useMemo,useState } from 'react';
 import './category-manager.css';
 
-const API='http://localhost:5000';
+const API=(import.meta.env.VITE_API_URL||'http://localhost:5000/api').replace(/\/api\/?$/,'').replace(/\/$/,'');
 const slugify=value=>value.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
 const departmentOf=item=>item.department||(item.type==='paties'?'pastries':'cakes');
 function Switch({value,onChange,label}){return <button type="button" role="switch" aria-checked={value} aria-label={label} className={`category-switch ${value?'on':''}`} onClick={()=>onChange(!value)}><span/></button>}

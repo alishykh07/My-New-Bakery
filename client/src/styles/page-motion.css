@@ -1,0 +1,5 @@
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .motion-item { opacity: 0; transform: translate3d(0, 28px, 0) scale(.985); filter: blur(3px); transition: opacity .72s cubic-bezier(.22, 1, .36, 1) var(--motion-delay, 0ms), transform .72s cubic-bezier(.22, 1, .36, 1) var(--motion-delay, 0ms), filter .58s ease var(--motion-delay, 0ms); will-change: opacity, transform, filter; }
+  .js-motion .motion-item.is-motion-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+  .js-motion .page-shell .motion-item.is-motion-visible:hover, .js-motion .about-page .about-gallery .motion-item.is-motion-visible:hover { transform: translate3d(0, -4px, 0) scale(1.006); transition-duration: .32s; }
+}

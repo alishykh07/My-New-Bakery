@@ -13,6 +13,7 @@ import reviewRoutes from './routes/reviewRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import SiteConfig from './models/SiteConfig.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+import { connectDatabase } from './config/db.js';
 
 const app=express();
 const allowedOrigins=new Set([...String(process.env.CLIENT_URL||'').split(',').map(origin=>origin.trim()).filter(Boolean),'http://localhost:5173','http://localhost:5174']);
@@ -22,6 +23,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(async(req,res,next)=>{try{await connectDatabase();next()}catch(error){next(error)}});
 app.use('/uploads',express.static('uploads'));
 app.get('/api/health',(req,res)=>res.json({status:'ok',service:'My New Bakery API'}));
 app.get('/api/site-config',async(req,res,next)=>{try{res.set('Cache-Control','no-store');res.json({config:await SiteConfig.findOneAndUpdate({key:'main'},{},{upsert:true,returnDocument:'after',setDefaultsOnInsert:true})})}catch(error){next(error)}});

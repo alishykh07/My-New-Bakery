@@ -15,7 +15,11 @@ import SiteConfig from './models/SiteConfig.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 const app=express();
-app.use(cors({origin:process.env.CLIENT_URL?.split(',')||true,credentials:true}));
+const allowedOrigins=new Set([...String(process.env.CLIENT_URL||'').split(',').map(origin=>origin.trim()).filter(Boolean),'http://localhost:5173','http://localhost:5174']);
+app.use(cors({
+  origin:(origin,callback)=>callback(null,!origin||allowedOrigins.has(origin)),
+  credentials:true,
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));

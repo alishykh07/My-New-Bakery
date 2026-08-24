@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import "./product-ops.css";
 import "./product-thumbnails.css";
-const API = "http://localhost:5000",
+const API = (import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/api\/?$/, "").replace(/\/$/, ""),
   departments = [
     ["cakes", "Cakes"],
     ["pastries", "Pastries"],

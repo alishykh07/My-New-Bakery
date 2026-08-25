@@ -19,11 +19,11 @@ export default function ProductCard({ product }) {
 
     <div className="relative z-[2] flex items-center justify-between gap-2 text-[10px] font-extrabold tracking-[.08em] text-gold uppercase md:text-xs">
       <span>{product.variants?.length ? 'From ' : ''}{formatPrice(startingPrice)}</span>
-      <span>{product.bestSeller ? 'Best Seller' : 'Fresh'}</span>
+      <span>Fresh</span>
     </div>
 
     <Link to={`/products/${product.slug}`} className="relative z-[1] mt-4 block overflow-hidden" aria-label={`View ${product.name}`}>
-      <div className="relative mx-auto aspect-[.84] w-[84%] overflow-hidden bg-white/10">{product.bestSeller&&<span className="bakery-best-seller-badge">Best seller</span>}
+      <div className="relative mx-auto aspect-[.84] w-[84%] overflow-hidden bg-white/10">
         <img loading="lazy" decoding="async" className="h-full w-full object-contain p-1 transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-within:scale-[1.03]" src={image} alt={product.name}/>
       </div>
       <span className="bakery-card-action"><span>View item</span><ArrowUpRight size={16}/></span>

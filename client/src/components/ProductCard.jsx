@@ -24,8 +24,8 @@ export default function ProductCard({ product }) {
     </div>
 
     <Link to={`/products/${product.slug}`} className="relative z-[1] mt-4 block overflow-hidden" aria-label={`View ${product.name}`}>
-      <div className="relative mx-auto aspect-[.84] w-[82%] overflow-hidden bg-transparent">
-        <img loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-125 group-focus-within:scale-125" src={image} alt={product.name}/>
+      <div className="relative mx-auto aspect-[.78] w-[88%] overflow-hidden bg-white/10">
+        <img loading="lazy" decoding="async" className="h-full w-full object-contain p-1 transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-within:scale-[1.03]" src={image} alt={product.name}/>
       </div>
       <span className="bakery-card-action"><span>View item</span><ArrowUpRight size={16}/></span>
     </Link>

@@ -34,5 +34,10 @@ export const matchesProductSearch = (product, query) => {
   return terms.every(term => searchableText.includes(term));
 };
 
-export const matchesProductCategory = (product, category) =>
-  !category || normalize(categoryName(product)) === normalize(category);
+export const matchesProductCategory = (product, category) => {
+  const wanted = normalize(category);
+  return !wanted || normalize(categoryName(product)) === wanted || normalize(product.category?.slug) === wanted;
+};
+
+export const matchesProductDepartment = (product, department) =>
+  !department || normalize(product.department || product.category?.department) === normalize(department);

@@ -45,7 +45,7 @@
 .bakery-card-action > span { background: #fece00; padding: .8rem 1rem; font-size: .6rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; box-shadow: 5px 5px 0 #2c0903; }
 .bakery-product-card:hover .bakery-card-action, .bakery-product-card:focus-within .bakery-card-action { opacity: 1; }
 @keyframes bakery-squiggle { from { transform: translate(0,0); } to { transform: translate(1px,-1px); } }
-@media (min-width: 768px) { .bakery-product-card { padding: 1.25rem 1.35rem 1.5rem; } }
+@media (min-width: 768px) { .bakery-product-card { min-height: 555px; padding: 1.4rem 1.55rem 1.7rem; } }
 @media (prefers-reduced-motion: reduce) { .bakery-product-card, .bakery-product-card img, .bakery-card-scribble path { transition-duration: .01ms; animation: none !important; } }
 
 .customer-reviews-section { color: #2c0903; background: linear-gradient(145deg,#fff7e7 0%,#f3dfb7 100%); }

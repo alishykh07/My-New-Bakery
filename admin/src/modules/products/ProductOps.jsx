@@ -2,47 +2,22 @@ import { useMemo, useState } from "react";
 import "./product-ops.css";
 import "./product-thumbnails.css";
 const API = (import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/api\/?$/, "").replace(/\/$/, ""),
-  departments = [
-    ["cakes", "Cakes"],
-    ["pastries", "Pastries"],
-    ["cupcakes", "Cupcakes"],
-    ["cookies", "Cookies"],
-    ["donuts", "Donuts"],
-    ["brownies", "Brownies"],
-    ["breads", "Breads"],
-    ["savory", "Savory"],
-  ],
   money = (v) => `Rs. ${(v || 0).toLocaleString()}`,
   src = (v) => (v?.startsWith("/uploads/") ? `${API}${v}` : v);
-const infer = (c) => {
-  const text = `${c?.name || ""} ${c?.slug || ""}`.toLowerCase(),
-    map = {
-      cakes: ["cake"],
-      pastries: ["pastry"],
-      cupcakes: ["cupcake"],
-      cookies: ["cookie"],
-      donuts: ["donut"],
-      brownies: ["brownie"],
-      breads: ["bread"],
-      savory: ["savory", "savoury", "paties", "patties"],
-    };
-  for (const [key, words] of Object.entries(map))
-    if (words.some((word) => text.includes(word))) return key;
-  return c?.type === "paties" ? "savory" : "cakes";
-};
-export default function ProductOps({ products, categories, patch, create, remove }) {
+export default function ProductOps({ products, categories, mainCategories = [], patch, create, remove }) {
   const [editing, setEditing] = useState(null),
-    [department, setDepartment] = useState("cakes"),
+    [department, setDepartment] = useState(mainCategories[0]?.slug || ""),
     [file, setFile] = useState(null),
     [preview, setPreview] = useState(""),
     [variants, setVariants] = useState([{ label: "", price: "" }]),
     [error, setError] = useState("");
+  const selectedMain = mainCategories.find(item => item.slug === department) || mainCategories[0];
   const filtered = useMemo(
-    () => categories.filter((c) => infer(c) === department),
+    () => categories.filter(category => category.department === department),
     [categories, department],
   );
   function start(item = {}) {
-    setDepartment(item.department || infer(item.category));
+    setDepartment(item.department || item.category?.department || mainCategories[0]?.slug || "");
     setFile(null);
     setPreview(src(item.images?.[0]) || "");
     setVariants(item.variants?.length ? item.variants.map((option) => ({ label: option.label, price: option.price })) : item.sizes?.length ? item.sizes.map((label) => ({ label, price: item.price })) : [{ label: "", price: "" }]);
@@ -82,9 +57,7 @@ export default function ProductOps({ products, categories, patch, create, remove
           name,
           department,
           category: category._id,
-          type: ["pastries", "savory"].includes(department)
-            ? "paties"
-            : "cakes",
+          type: selectedMain?.productType || category.type || "cakes",
           price: Math.min(...cleanVariants.map((option) => option.price)),
           stock: +form.get("stock"),
           lowStockThreshold: +form.get("lowStockThreshold"),
@@ -125,9 +98,9 @@ export default function ProductOps({ products, categories, patch, create, remove
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
             >
-              {departments.map(([v, l]) => (
-                <option key={v} value={v}>
-                  {l}
+              {mainCategories.filter(item => item.isActive !== false).map(item => (
+                <option key={item._id} value={item.slug}>
+                  {item.name}
                 </option>
               ))}
             </select>
@@ -296,12 +269,7 @@ export default function ProductOps({ products, categories, patch, create, remove
                   </div>
                 </td>
                 <td>
-                  {
-                    departments.find(
-                      ([key]) =>
-                        key === (item.department || infer(item.category)),
-                    )?.[1]
-                  }
+                  {mainCategories.find(category => category.slug === item.department)?.name || item.department}
                 </td>
                 <td>{item.category?.name}</td>
                 <td>{money(item.price)}</td>

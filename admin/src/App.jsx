@@ -633,6 +633,7 @@ export default function App() {
       <ProductOps
         products={data.products}
         categories={data.categories}
+        mainCategories={data.mainCategories}
         patch={(id, b) => mutate(`/products/${id}`, b)}
         create={(b) => mutate("/products", b, "POST")}
         remove={(id) => mutate(`/products/${id}`, {}, "DELETE")}

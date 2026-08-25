@@ -4,7 +4,8 @@ import { printOrders } from '../orders/OrdersAdmin.jsx';
 
 const money=value=>`Rs. ${(Number(value)||0).toLocaleString()}`;
 const label=value=>String(value||'').replaceAll('_',' ').replace(/\b\w/g,character=>character.toUpperCase());
-const itemImage=item=>{const image=item?.image||item?.product?.images?.[0]||'';return image&&!/^(https?:|data:|blob:)/i.test(image)?`http://localhost:5000${image.startsWith('/')?'':'/'}${image}`:image};
+const apiRoot=(import.meta.env.VITE_API_URL||'http://localhost:5000/api').replace(/\/api\/?$/,'').replace(/\/$/,'');
+const itemImage=item=>{const image=item?.image||item?.product?.images?.[0]||'';return image&&!/^(https?:|data:|blob:)/i.test(image)?`${apiRoot}${image.startsWith('/')?'':'/'}${image}`:image};
 
 export default function PaymentsManager({orders=[],patch}){
   const [query,setQuery]=useState(''),[status,setStatus]=useState('all'),[pageSize,setPageSize]=useState(5),[page,setPage]=useState(1),[selected,setSelected]=useState('');

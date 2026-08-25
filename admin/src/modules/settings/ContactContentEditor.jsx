@@ -1,7 +1,7 @@
 import { LoaderCircle, MapPin, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
-const API='http://localhost:5000/api';
+const API=import.meta.env.VITE_API_URL||'http://localhost:5000/api';
 const branchDefaults=[
   {name:'Afandi Town Hyderabad Branch',address:'My New Bakery - Afandi Town, Hyderabad, Sindh 17000, Pakistan',longitude:68.373,latitude:25.397},
   {name:'Auto Bahn Rd Hyderabad Branch',address:'Auto Bahn Road, opposite Unique Shopping Mall and Apartments, Latifabad Unit 2, Hyderabad, Sindh 71000, Pakistan',longitude:68.357,latitude:25.365},

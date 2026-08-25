@@ -38,10 +38,11 @@ function isInPeriod(order, period, from, to) {
   return date >= start && date < end;
 }
 
+const apiRoot=(import.meta.env.VITE_API_URL||'http://localhost:5000/api').replace(/\/api\/?$/,'').replace(/\/$/,'');
 const printableImage=value=>{
   const image=String(value||'').trim();
   if(!image)return '';
-  return /^(https?:|data:|blob:)/i.test(image)?image:`http://localhost:5000${image.startsWith('/')?'':'/'}${image}`;
+  return /^(https?:|data:|blob:)/i.test(image)?image:`${apiRoot}${image.startsWith('/')?'':'/'}${image}`;
 };
 
 export function printOrders(orders) {

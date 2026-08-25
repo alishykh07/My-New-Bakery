@@ -1,7 +1,7 @@
 import { Image, LoaderCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const API='http://localhost:5000/api';
+const API=import.meta.env.VITE_API_URL||'http://localhost:5000/api';
 const defaults={heroEyebrow:'MY NEW BAKERY',heroTitle:'Our story',heroDescription:'We bake thoughtful cakes and golden little bites for the moments you will remember.',heroImage:'/images/cakes/wedding-hero.png',storyKicker:'OUR STORY',storyTitle:'Baked with passion, served with love.',storyText:'',storyExtra:'Every cake is made with carefully selected ingredients, skilled hands and attention to the smallest details.',storyImage:'/images/cakes/Header.jfif',storyImageLabel:'My New Bakery',reasonsKicker:'WHY CHOOSE US',reasonsTitle:'What makes us special?',creationKicker:'OUR CREATIONS',creationTitle:'Made to make you smile.',creationButton:'View our products',numbersKicker:'OUR NUMBERS',numbersTitle:'Serving happiness every day',stats:[{value:'500+',label:'Cakes delivered'},{value:'1000+',label:'Happy customers'},{value:'50+',label:'Custom cakes'},{value:'5+',label:'Years of experience'}]};
 const reasonDefaults=[['Fresh ingredients','Premium ingredients selected fresh for everything we bake.'],['Handmade with love','Every product is handcrafted with patience and care.'],['Custom cakes','From birthdays to weddings, we create cakes just for you.'],['On-time delivery','Careful preparation and dependable delivery for your moments.'],['Quality you trust','Quality and hygiene remain at the heart of every order.']];
 

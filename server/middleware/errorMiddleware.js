@@ -1,2 +1,2 @@
 export function notFound(req,res){res.status(404).json({message:`Route not found: ${req.method} ${req.originalUrl}`})}
-export function errorHandler(error,req,res,next){console.error(error);res.status(error.statusCode||500).json({message:error.message||'Something went wrong'})}
+export function errorHandler(error,req,res,next){console.error(error);if(error?.code===11000)return res.status(409).json({message:'A record with this value already exists. Please use a different name.'});res.status(error.statusCode||500).json({message:error.message||'Something went wrong'})}

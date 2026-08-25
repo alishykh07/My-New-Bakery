@@ -22,7 +22,7 @@
   position: relative;
   isolation: isolate;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   padding: 1rem 1rem 1.25rem;
   color: #fece00;
   background: transparent;

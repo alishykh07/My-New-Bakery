@@ -1,4 +1,4 @@
-import { ArrowUpRight, Star } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/formatPrice.js';
 
@@ -8,7 +8,6 @@ const scribblePath = 'M126 8c-10 10-26 17-41 22-24 9-50 14-74 23 24 5 55 0 94 8 
 
 export default function ProductCard({ product }) {
   const image = product.images?.[0] || product.image;
-  const rating = Number(product.rating) || (product.bestSeller ? 5 : null);
   const startingPrice = product.variants?.length ? Math.min(...product.variants.map(option => Number(option.price) || 0)) : product.price;
 
   return <article className="bakery-product-card group">
@@ -20,7 +19,7 @@ export default function ProductCard({ product }) {
 
     <div className="relative z-[2] flex items-center justify-between gap-2 text-[10px] font-extrabold tracking-[.08em] text-gold uppercase md:text-xs">
       <span>{product.variants?.length ? 'From ' : ''}{formatPrice(startingPrice)}</span>
-      {rating ? <span className="flex items-center gap-1"><Star size={12} fill="currentColor"/>{rating.toFixed(1)}</span> : <span>{product.bestSeller ? 'Best seller' : 'Fresh'}</span>}
+      <span>{product.bestSeller ? 'Best Seller' : 'Fresh'}</span>
     </div>
 
     <Link to={`/products/${product.slug}`} className="relative z-[1] mt-4 block overflow-hidden" aria-label={`View ${product.name}`}>

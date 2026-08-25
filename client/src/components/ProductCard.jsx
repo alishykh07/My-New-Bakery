@@ -16,6 +16,7 @@ export default function ProductCard({ product }) {
     <svg aria-hidden="true" viewBox="0 0 8 555" preserveAspectRatio="none" className="bakery-card-line bakery-card-line-left"><path d={verticalPath}/></svg>
     <svg aria-hidden="true" viewBox="0 0 8 555" preserveAspectRatio="none" className="bakery-card-line bakery-card-line-right"><path d={verticalPath}/></svg>
     <svg aria-hidden="true" viewBox="0 0 166 306" preserveAspectRatio="none" className="bakery-card-scribble"><path d={scribblePath}/></svg>
+    {product.bestSeller && <span className="bakery-best-seller-badge">Best seller</span>}
 
     <div className="relative z-[2] flex items-center justify-between gap-2 text-[10px] font-extrabold tracking-[.08em] text-gold uppercase md:text-xs">
       <span>{product.variants?.length ? 'From ' : ''}{formatPrice(startingPrice)}</span>

@@ -18,12 +18,13 @@ export default function ProductCatalog({ type }) {
   const activeCategory = params.get("category");
   const department = params.get("department");
   useEffect(() => {
-    api(`/products?type=${type}`)
+    api(`/products`)
       .then((data) => setItems(data.products))
       .catch(() => {});
   }, [type]);
   const shown = items.filter(
     (item) =>
+      (!department ? item.type === type : true) &&
       matchesProductSearch(item, query) &&
       matchesProductCategory(item, activeCategory) &&
       matchesProductDepartment(item, department),

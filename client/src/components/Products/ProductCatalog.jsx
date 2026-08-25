@@ -55,7 +55,7 @@ export default function ProductCatalog({ type }) {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search by name, flavour, category or type"
       />
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <div className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4">
         {shown.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

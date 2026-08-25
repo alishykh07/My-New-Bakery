@@ -39,5 +39,11 @@ export const matchesProductCategory = (product, category) => {
   return !wanted || normalize(categoryName(product)) === wanted || normalize(product.category?.slug) === wanted;
 };
 
+const departmentKey = value => {
+  const key = normalize(value).replaceAll(' ', '');
+  if (['pastry', 'pastries', 'patry', 'patries', 'patie', 'paties', 'patty', 'patties', 'savory', 'savoury'].includes(key)) return 'pastry';
+  return key.endsWith('s') ? key.slice(0, -1) : key;
+};
+
 export const matchesProductDepartment = (product, department) =>
-  !department || normalize(product.department || product.category?.department) === normalize(department);
+  !department || departmentKey(product.department || product.category?.department) === departmentKey(department);

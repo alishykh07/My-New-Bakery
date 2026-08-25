@@ -41,6 +41,8 @@
 .bakery-card-scribble { position: absolute; inset: 6px; z-index: 0; width: calc(100% - 12px); height: calc(100% - 12px); overflow: hidden; pointer-events: none; }
 .bakery-card-scribble path { fill: none; stroke: #ffd974; stroke-width: 13; stroke-linecap: round; stroke-linejoin: round; opacity: .48; stroke-dasharray: 1800; stroke-dashoffset: 1800; transition: stroke-dashoffset .7s ease; }
 .bakery-product-card:hover .bakery-card-scribble path, .bakery-product-card:focus-within .bakery-card-scribble path { stroke-dashoffset: 0; animation: bakery-squiggle .45s infinite alternate; }
+.bakery-best-seller-badge { position:absolute; left:.55rem; top:.55rem; z-index:3; display:inline-flex; align-items:center; min-height:1.65rem; padding:.35rem .6rem .35rem .75rem; border:1px solid #2c0903; background:#fece00; color:#2c0903; box-shadow:3px 3px 0 #2c0903; font-size:.56rem; font-weight:900; letter-spacing:.11em; line-height:1; text-transform:uppercase; }
+.bakery-best-seller-badge::after { position:absolute; right:-.5rem; bottom:-.42rem; width:.5rem; height:.5rem; border-right:1px solid #2c0903; border-bottom:1px solid #2c0903; background:#a86e18; content:""; clip-path:polygon(0 0,100% 0,100% 100%); }
 .bakery-card-action { position: absolute; inset: 0; z-index: 4; display: flex; align-items: center; justify-content: center; gap: .5rem; opacity: 0; background: transparent; color: #2c0903; transition: opacity .25s ease; }
 .bakery-card-action > span { background: #fece00; padding: .8rem 1rem; font-size: .6rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; box-shadow: 5px 5px 0 #2c0903; }
 .bakery-product-card:hover .bakery-card-action, .bakery-product-card:focus-within .bakery-card-action { opacity: 1; }

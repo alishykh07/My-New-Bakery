@@ -113,9 +113,11 @@ export default function OrdersAdmin({ orders, patch }) {
         <button disabled={!shown.length} onClick={() => printOrderReport(shown, period)}>Print shown orders</button>
       </div>
     </div>
-    <div className="table-wrap"><table><thead><tr><th>Order/customer</th><th>Items & delivery</th><th>Payment</th><th>Status</th><th>Total</th><th>Invoice</th></tr></thead><tbody>{shown.map(order => <tr key={order._id}>
-      <td><b>{order.orderNumber}</b><small>Ordered: {dateTime(order.createdAt)}<br />{order.customer?.name} · {order.customer?.email}<br />{order.phone}</small></td>
-      <td>{order.items?.map(item => `${item.name} × ${item.quantity} (${item.size || 'standard'})`).join(', ')}<small>{order.fulfillmentType === 'pickup' ? 'Bakery pickup' : [order.address?.line1, order.address?.area].filter(Boolean).join(', ')}<br />{order.fulfillmentType === 'pickup' ? 'Pickup' : 'Delivery'}: {dateTime(order.deliveryDate)}</small></td>
+    <div className="table-wrap orders-table-wrap"><table className="orders-table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Delivery</th><th>Payment</th><th>Status</th><th>Total</th><th>Invoice</th></tr></thead><tbody>{shown.map(order => <tr key={order._id}>
+      <td className="order-reference"><b>{order.orderNumber}</b><small>Ordered<br />{dateTime(order.createdAt)}</small></td>
+      <td className="order-customer"><b>{order.customer?.name || 'Customer'}</b><small>{order.customer?.email}<br />{order.phone}</small></td>
+      <td className="order-items">{order.items?.map(item => `${item.name} × ${item.quantity} (${item.size || 'standard'})`).join(', ') || 'No items'}</td>
+      <td className="order-delivery"><b>{order.fulfillmentType === 'pickup' ? 'Pickup' : 'Delivery'}</b><small>{order.fulfillmentType === 'pickup' ? 'Bakery pickup' : [order.address?.line1, order.address?.area, order.address?.city].filter(Boolean).join(', ') || 'Address not supplied'}<br />{dateTime(order.deliveryDate)}</small></td>
       <td><select value={order.paymentStatus} onChange={event => patch(order._id, { paymentStatus: event.target.value })}>{['pending', 'paid', 'failed'].map(value => <option key={value}>{value}</option>)}</select><small>{order.paymentMethod}</small></td>
       <td><select value={order.orderStatus} onChange={event => patch(order._id, { orderStatus: event.target.value })}>{['pending', 'confirmed', 'preparing', 'out_for_delivery', 'delivered', 'cancelled'].map(value => <option key={value}>{value}</option>)}</select></td>
       <td><b>{money(order.total)}</b></td><td><button className="secondary" onClick={() => printOrders([order])}>Print</button></td>

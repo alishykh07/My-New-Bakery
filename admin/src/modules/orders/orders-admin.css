@@ -4,3 +4,9 @@
 .date-filter input { width: 135px; }
 .orders-empty { padding: 35px; color: #9b704e; text-align: center; }
 @media (max-width: 1100px) { .orders-toolbar { align-items: flex-start; flex-direction: column; } .orders-toolbar .filters { justify-content: flex-start; } }
+
+.orders-table-wrap { overflow-x: auto; }
+.orders-table { width: 100%; min-width: 1220px; table-layout: fixed; }
+.orders-table th, .orders-table td { vertical-align: top; }
+.orders-table th:nth-child(1) { width: 15%; }.orders-table th:nth-child(2) { width: 15%; }.orders-table th:nth-child(3) { width: 18%; }.orders-table th:nth-child(4) { width: 20%; }.orders-table th:nth-child(5) { width: 12%; }.orders-table th:nth-child(6) { width: 14%; }.orders-table th:nth-child(7) { width: 8%; }.orders-table th:nth-child(8) { width: 8%; }
+.orders-table td { padding-top: 20px; padding-bottom: 20px; }.orders-table b { display:block; color:#2c0903; line-height:1.35; }.orders-table small { display:block; margin-top:7px; color:#9b704e; font-size:12px; line-height:1.45; overflow-wrap:anywhere; }.order-items { color:#2c0903; font-size:14px; line-height:1.5; overflow-wrap:anywhere; }.orders-table select { width:100%; min-width:0; }.orders-table td:nth-child(7) { white-space:nowrap; padding-top:28px; }.orders-table td:nth-child(8) { padding-top:24px; text-align:center; }

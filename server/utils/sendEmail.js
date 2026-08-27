@@ -22,19 +22,21 @@ function orderDate(value) {
     : "To be confirmed";
 }
 
+function publicSiteOrigin() {
+  return String(process.env.PUBLIC_SITE_URL || process.env.CLIENT_URL || 'https://mynewbakery.vercel.app').split(',')[0].trim().replace(/\/$/, '');
+}
+function absoluteImageUrl(value) {
+  const image = String(value || '').trim();
+  if (!image) return '';
+  if (/^https?:\/\//i.test(image)) return image;
+  return publicSiteOrigin() + (image.startsWith('/') ? image : '/' + image);
+}
 function fixedOrderEmailHero(bakery = {}) {
-  return String(
-    process.env.ORDER_EMAIL_HERO_IMAGE ||
-      bakery.emailHeroImage ||
-      bakery.orderEmailHeroImage ||
-      bakery.heroImage ||
-      "",
-  ).trim();
+  return absoluteImageUrl(process.env.ORDER_EMAIL_HERO_IMAGE || bakery.emailHeroImage || bakery.orderEmailHeroImage || bakery.heroImage || '');
 }
 function fixedOrderEmailLogo(bakery = {}) {
-  return String(process.env.ORDER_EMAIL_LOGO || bakery.logo || "").trim();
+  return absoluteImageUrl(process.env.ORDER_EMAIL_LOGO || bakery.logo || '/images/logo/logo.jfif');
 }
-
 function createTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
@@ -93,7 +95,7 @@ export async function sendOrderConfirmation({
   const brandLogo = fixedOrderEmailLogo(bakery);
   const logo = brandLogo
     ? `<img src="${escapeHtml(brandLogo)}" alt="${bakeryName}" width="52" style="display:block;width:52px;height:52px;border:0;border-radius:50%;object-fit:cover">`
-    : '<div style="width:52px;height:52px;border:1px solid #f7bf3e;border-radius:50%;color:#f7bf3e;font:700 17px Georgia,serif;line-height:52px;text-align:center">MNB</div>';
+    : '';
   const hero = heroImage
     ? `<img src="${escapeHtml(heroImage)}" alt="Freshly baked order" width="282" style="display:block;width:100%;height:370px;min-height:370px;border:0;object-fit:cover">`
     : '<div style="height:370px;min-height:370px;background:linear-gradient(145deg,#9b621a,#f3d39a)"></div>';

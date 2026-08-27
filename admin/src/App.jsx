@@ -455,53 +455,25 @@ export default function App() {
     setLoading(true);
     setError("");
     try {
-      const [
-        products,
-        categories,
-        mainCategories,
-        orders,
-        requests,
-        dashboard,
-        customers,
-        reviews,
-        inquiries,
-        config,
-        notifications,
-        inventoryHistory,
-      ] = await Promise.all([
-        request("/products", {}, token),
-        request("/categories", {}, token),
-        request("/main-categories", {}, token),
-        request("/orders", {}, token),
-        request("/custom-cakes", {}, token),
-        request("/admin/dashboard", {}, token),
-        request("/admin/customers", {}, token),
-        request("/admin/reviews", {}, token),
-        request("/admin/inquiries", {}, token),
-        request("/admin/config", {}, token),
-        request("/admin/notifications", {}, token),
-        request("/products/inventory-history", {}, token),
+      if (tab === "Dashboard") {
+        const [dashboard, config, notifications] = await Promise.all([
+          request("/admin/dashboard", {}, token),
+          request("/admin/config", {}, token),
+          request("/admin/notifications", {}, token),
+        ]);
+        setData(current => ({ ...current, dashboard, config: config.config, notifications: notifications.notifications }));
+        return;
+      }
+      const [products,categories,mainCategories,orders,requests,dashboard,customers,reviews,inquiries,config,notifications,inventoryHistory] = await Promise.all([
+        request("/products", {}, token),request("/categories", {}, token),request("/main-categories", {}, token),request("/orders", {}, token),request("/custom-cakes", {}, token),request("/admin/dashboard", {}, token),request("/admin/customers", {}, token),request("/admin/reviews", {}, token),request("/admin/inquiries", {}, token),request("/admin/config", {}, token),request("/admin/notifications", {}, token),request("/products/inventory-history", {}, token),
       ]);
-      setData({
-        products: products.products,
-        categories: categories.categories,
-        mainCategories: mainCategories.mainCategories,
-        orders: orders.orders,
-        requests: requests.requests,
-        dashboard,
-        customers: customers.customers,
-        reviews: reviews.reviews,
-        inquiries: inquiries.inquiries,
-        config: config.config,
-        notifications: notifications.notifications,
-        stockMovements: inventoryHistory.movements,
-      });
+      setData({products:products.products,categories:categories.categories,mainCategories:mainCategories.mainCategories,orders:orders.orders,requests:requests.requests,dashboard,customers:customers.customers,reviews:reviews.reviews,inquiries:inquiries.inquiries,config:config.config,notifications:notifications.notifications,stockMovements:inventoryHistory.movements});
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [token]);
+  }, [token, tab]);
   useEffect(() => {
     refresh();
   }, [refresh]);

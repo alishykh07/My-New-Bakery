@@ -4,6 +4,10 @@ function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, charact
 function money(value) { return `Rs. ${Number(value || 0).toLocaleString('en-PK')}`; }
 function orderDate(value) { return value ? new Date(value).toLocaleDateString('en-PK', { day:'numeric', month:'long', year:'numeric' }) : 'To be confirmed'; }
 
+function fixedOrderEmailHero(bakery = {}) {
+  return String(process.env.ORDER_EMAIL_HERO_IMAGE || bakery.emailHeroImage || bakery.orderEmailHeroImage || bakery.heroImage || '').trim();
+}
+
 function createTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
@@ -39,7 +43,7 @@ export async function sendOrderConfirmation({ to, customerName, customerEmail, o
     ? 'Your order will be ready for collection at the bakery.'
     : `Delivery to ${escapeHtml([order.address?.line1, order.address?.area, order.address?.city].filter(Boolean).join(', ') || 'your selected address')}.`;
   const deliveryTime = escapeHtml(bakery.estimatedDeliveryTime || bakery.orderTimings || 'We will confirm the exact time with you shortly.');
-  const heroImage = String(order.items?.[0]?.image || bakery.heroImage || '').trim();
+  const heroImage = fixedOrderEmailHero(bakery);
   const brandLogo = String(bakery.logo || '').trim();
   const logo = brandLogo ? `<img src="${escapeHtml(brandLogo)}" alt="${bakeryName}" width="52" style="display:block;width:52px;height:52px;border:0;border-radius:50%;object-fit:cover">` : '<div style="width:52px;height:52px;border:1px solid #f7bf3e;border-radius:50%;color:#f7bf3e;font:700 17px Georgia,serif;line-height:52px;text-align:center">MNB</div>';
   const hero = heroImage ? `<img src="${escapeHtml(heroImage)}" alt="Freshly baked order" width="282" style="display:block;width:100%;height:100%;min-height:300px;border:0;object-fit:cover">` : '<div style="min-height:300px;background:linear-gradient(145deg,#9b621a,#f3d39a)"></div>';

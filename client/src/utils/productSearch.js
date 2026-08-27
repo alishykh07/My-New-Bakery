@@ -41,7 +41,8 @@ export const matchesProductCategory = (product, category) => {
 
 const departmentKey = value => {
   const key = normalize(value).replaceAll(' ', '');
-  if (['pastry', 'pastries', 'patry', 'patries', 'patie', 'paties', 'patty', 'patties', 'savory', 'savoury'].includes(key)) return 'pastry';
+  if (['pastry', 'pastries', 'patry', 'patries'].includes(key)) return 'pastry';
+  if (['patie', 'paties', 'patty', 'patties', 'savory', 'savoury'].includes(key)) return 'patties';
   return key.endsWith('s') ? key.slice(0, -1) : key;
 };
 
